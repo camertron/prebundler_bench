@@ -1,0 +1,8 @@
+FROM ruby:2.7
+ARG PREBUNDLER_ACCESS_KEY
+ARG PREBUNDLER_ACCESS_SECRET
+WORKDIR /usr/src/app
+RUN gem install prebundler
+COPY Gemfile* ./
+COPY .prebundle_config ./
+RUN prebundle install --jobs $(nproc)
